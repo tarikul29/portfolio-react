@@ -22,7 +22,7 @@ export function About({ motion }: { motion: boolean }) {
         <div ref={portraitRef} className="portrait-wrap">
           <figure className={`portrait ${portraitSeen ? 'is-in' : ''}`}>
             <div className="portrait-tilt" ref={tiltRef}>
-              <img src="/images/about.webp" width={556} height={600} alt="Portrait of Tarikul." loading="lazy" />
+              <img src="/images/about.webp" width={960} height={1200} alt="Tarikul standing on a rooftop in a red t-shirt." loading="lazy" />
             </div>
           </figure>
         </div>

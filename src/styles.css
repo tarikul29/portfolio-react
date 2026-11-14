@@ -1241,9 +1241,9 @@ a {
 .portrait img {
   display: block;
   width: 100%;
-  aspect-ratio: 278 / 300;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: 50% 30%;
+  object-position: 50% 20%;
   transform: scale(1.25);
 }
 
