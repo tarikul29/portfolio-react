@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-react-nu-woad.vercel.app/sitemap.xml
