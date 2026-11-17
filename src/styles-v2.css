@@ -628,3 +628,139 @@ body.is-locked {
 .card-slot .card {
   width: 100%;
 }
+
+/* =====================================================================
+   Fixes v2.1: smaller contact buttons, joined shards, softer backdrop,
+   float cards that stay off the face on phones
+   ===================================================================== */
+
+/* ---------- Contact: smaller type and buttons ---------- */
+.ccard {
+  padding: clamp(1rem, 3vw, 1.6rem);
+}
+
+.ccard-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.ccard-icon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.ccard-label {
+  font-size: 0.8rem;
+}
+
+.ccard-value {
+  font-size: clamp(1rem, 4.2vw, 2rem);
+}
+
+.ccard-actions {
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+.ccard-actions .btn,
+.ccard-actions button,
+.ccard .btn {
+  padding: 0.5rem 1.05rem;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  border-radius: 0.3rem;
+}
+
+/* ---------- Hero backdrop: soft glow instead of a hard circle ---------- */
+.stage .ring,
+.stage .ring-a,
+.stage .ring-b {
+  display: none;
+}
+
+.disc {
+  left: -6%;
+  top: 2%;
+  width: 112%;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side at 32% 34%, rgba(244, 114, 182, 0.55), transparent 72%),
+    radial-gradient(closest-side at 70% 62%, rgba(97, 167, 189, 0.55), transparent 72%),
+    radial-gradient(closest-side at 50% 90%, rgba(139, 124, 246, 0.45), transparent 75%);
+  box-shadow: none;
+  filter: blur(26px);
+  animation: breathe 7s ease-in-out infinite;
+}
+
+/* A slim gradient arch behind the photo gives it a frame without a hard disc */
+.shards::before {
+  content: "";
+  position: absolute;
+  inset: -5% -6% 0 -6%;
+  z-index: -1;
+  border-radius: 46% 46% 1rem 1rem / 34% 34% 1rem 1rem;
+  background: linear-gradient(160deg, rgba(231, 171, 113, 0.35), rgba(244, 114, 182, 0.18) 45%, rgba(97, 167, 189, 0.3));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* ---------- Shards: edges meet exactly, so the photo is whole once assembled ---------- */
+.shard-wrap {
+  filter: drop-shadow(0 14px 22px rgba(0, 5, 27, 0.45));
+}
+
+.shard-wrap-1 .shard {
+  clip-path: polygon(0 0, 38% 0, 28% 100%, 0 100%);
+}
+
+.shard-wrap-2 .shard {
+  clip-path: polygon(37.8% 0, 74% 0, 64% 100%, 27.8% 100%);
+}
+
+.shard-wrap-3 .shard {
+  clip-path: polygon(73.8% 0, 100% 0, 100% 100%, 63.8% 100%);
+}
+
+@media (hover: none), (max-width: 48rem) {
+  .shard-wrap-1,
+  .shard-wrap-2,
+  .shard-wrap-3,
+  .float-card,
+  .stage {
+    translate: none;
+  }
+}
+
+/* ---------- Float cards: small, tucked outside the face on phones ---------- */
+@media (max-width: 48rem) {
+  .shards {
+    left: 12%;
+    width: 76%;
+  }
+
+  .float-card {
+    padding: 0.4rem 0.65rem 0.4rem 0.5rem;
+    gap: 0.45rem;
+    border-radius: 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .float-card img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .float-card small {
+    font-size: 0.68rem;
+  }
+
+  .fc-a {
+    left: -2%;
+    bottom: -4%;
+  }
+
+  .fc-b {
+    right: -2%;
+    top: -3%;
+  }
+}
