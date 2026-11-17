@@ -764,3 +764,37 @@ body.is-locked {
     top: -3%;
   }
 }
+
+/* =====================================================================
+   Fixes v2.2: the photo sits fully inside its arch frame, and the frame
+   is cut into shards together with the photo. No mouse parallax.
+   ===================================================================== */
+.shards::before {
+  display: none;
+}
+
+.shard-wrap-1,
+.shard-wrap-2,
+.shard-wrap-3 {
+  translate: none;
+}
+
+.shard-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 50% 50% 1rem 1rem / 30% 30% 1rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(160deg, rgba(231, 171, 113, 0.55), rgba(244, 114, 182, 0.35) 45%, rgba(97, 167, 189, 0.5));
+}
+
+.shard img {
+  inset: 4.5% 6.5% 4.5% 6.5%;
+  width: 87%;
+  height: 91%;
+  border-radius: 50% 50% 0.6rem 0.6rem / 27% 27% 0.6rem 0.6rem;
+  object-position: 50% 30%;
+}
+
+.shard::after {
+  display: none;
+}
