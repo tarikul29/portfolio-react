@@ -7,12 +7,15 @@ import { Skills } from './components/Skills';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { Rail } from './components/Rail';
-import { Intro } from './components/Intro';
+import { Preloader } from './components/Preloader';
+import { Embers } from './components/Embers';
+import { StatsStrip } from './components/StatsStrip';
 import { CursorGlow } from './components/CursorGlow';
 import { sections } from './data';
 import { useActiveSection } from './hooks/useActiveSection';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useScrollVars } from './hooks/useScrollVars';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
 
 const ids = sections.map((s) => s.id);
 
@@ -22,16 +25,24 @@ export default function App() {
   const [ready, setReady] = useState(reduced);
   const active = useActiveSection(ids);
   useScrollVars();
+  useSmoothScroll(motion);
 
   const onIntroDone = useCallback(() => setReady(true), []);
 
   return (
     <>
-      {motion && <Intro onDone={onIntroDone} />}
+      {motion && <Preloader onDone={onIntroDone} />}
+      <div className="aurora" aria-hidden="true">
+        <i className="blob b1" />
+        <i className="blob b2" />
+        <i className="blob b3" />
+      </div>
+      {motion && <Embers />}
       {motion && <CursorGlow />}
       <Header active={active} ready={ready} />
       <main id="main">
         <Hero ready={ready} motion={motion} />
+        <StatsStrip motion={motion} />
         <Marquee />
         <Work motion={motion} />
         <Skills motion={motion} />

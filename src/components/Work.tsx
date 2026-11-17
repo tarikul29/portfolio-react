@@ -3,8 +3,8 @@ import type { KeyboardEvent, CSSProperties } from 'react';
 import { projects } from '../data';
 import type { Project } from '../data';
 import { Icon } from './Icon';
+import { ShopArt, WeatherArt, BookArt } from './ProjectArt';
 import { PhoneFrame } from './PhoneFrame';
-import { Reveal } from './Reveal';
 import { SplitText } from './SplitText';
 import { useInView } from '../hooks/useInView';
 import { useTilt } from '../hooks/useTilt';
@@ -52,6 +52,8 @@ function Card({ project, index, active, motion, onSelect, onKey }: CardProps) {
       <span className="card-media" aria-hidden="true">
         {project.id === 'blood' ? (
           <img src="/images/bloodconnect-logo.svg" alt="" width={96} height={96} />
+        ) : project.id === 'iqra' ? (
+          <img className="iqra-mark" src="/images/iqra-icon.png" alt="" width={96} height={96} />
         ) : (
           <Icon name={project.icon} />
         )}
@@ -67,7 +69,7 @@ function Card({ project, index, active, motion, onSelect, onKey }: CardProps) {
 function Panel({ project, phase }: { project: Project; phase: Phase }) {
   return (
     <article
-      className={`panel ${phase === 'leaving' ? 'is-leaving' : ''} ${phase === 'entering' ? 'is-entering' : ''}`}
+      className={`panel panel-${project.id} ${phase === 'leaving' ? 'is-leaving' : ''} ${phase === 'entering' ? 'is-entering' : ''}`}
       id={`panel-${project.id}`}
       role="tabpanel"
       aria-labelledby={`tab-${project.id}`}
@@ -78,6 +80,8 @@ function Panel({ project, phase }: { project: Project; phase: Phase }) {
           <PhoneFrame src="/images/bloodconnect-screen.webp" alt="BloodConnect BD on a phone: a Bangla headline, an urgent blood request button and blood group chips." />
         )}
         {project.id === 'iqra' && (
+          <div className="loader-wrap">
+          <BookArt />
           <div className="loader" role="img" aria-label="Loading. This project is still being built.">
             <p className="loader-word">
               Loading
@@ -91,8 +95,10 @@ function Panel({ project, phase }: { project: Project; phase: Phase }) {
               <div className="loader-fill" />
             </div>
           </div>
+          </div>
         )}
-        {(project.id === 'shop' || project.id === 'weather') && <Icon name={project.icon} className="art-icon" />}
+        {project.id === 'shop' && <ShopArt />}
+        {project.id === 'weather' && <WeatherArt />}
       </div>
       <div className="panel-copy">
         {project.id === 'blood' && (
@@ -134,6 +140,7 @@ export function Work({ motion }: { motion: boolean }) {
   const timers = useRef<number[]>([]);
   const cardRefs = useRef<HTMLDivElement>(null);
   const [titleRef, titleSeen] = useInView<HTMLHeadingElement>(0.4);
+  const [cardsRef, cardsSeen] = useInView<HTMLDivElement>(0.2);
 
   useEffect(() => {
     const list = timers.current;
@@ -202,21 +209,22 @@ export function Work({ motion }: { motion: boolean }) {
         <SplitText text="Work" play={titleSeen} step={60} />
       </h2>
 
-      <Reveal delay={100}>
+      <div ref={cardsRef} className={`cards-stream ${cardsSeen ? 'is-in' : ''}`}>
         <div className="cards" role="tablist" aria-label="Projects" ref={cardRefs}>
           {projects.map((project, i) => (
-            <Card
-              key={project.id}
-              project={project}
-              index={i}
-              active={i === current}
-              motion={motion}
-              onSelect={select}
-              onKey={onKey}
-            />
+            <div className="card-slot" style={{ '--i': i } as CSSProperties} key={project.id}>
+              <Card
+                project={project}
+                index={i}
+                active={i === current}
+                motion={motion}
+                onSelect={select}
+                onKey={onKey}
+              />
+            </div>
           ))}
         </div>
-      </Reveal>
+      </div>
 
       <div className="panels" style={{ '--tab': current } as CSSProperties}>
         <Panel project={projects[current]} phase={phase} />

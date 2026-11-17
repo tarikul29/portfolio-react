@@ -19,12 +19,19 @@ export function About({ motion }: { motion: boolean }) {
   return (
     <section className="block wrap" id="about" aria-labelledby="about-title">
       <div className="about-grid">
-        <div ref={portraitRef} className="portrait-wrap">
-          <figure className={`portrait ${portraitSeen ? 'is-in' : ''}`}>
-            <div className="portrait-tilt" ref={tiltRef}>
-              <img src="/images/about.webp" width={960} height={1200} alt="Tarikul standing on a rooftop in a red t-shirt." loading="lazy" />
-            </div>
-          </figure>
+        <div ref={portraitRef} className="portrait-wrap hang">
+          <span className="nail" aria-hidden="true" />
+          <div className={`hang-swing ${portraitSeen ? 'is-in' : ''}`}>
+            <svg className="strings" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M50 0 L14 20 M50 0 L86 20" />
+            </svg>
+            <figure className="portrait is-in">
+              <div className="portrait-tilt" ref={tiltRef}>
+                <img src="/images/about.webp" width={960} height={1200} alt="Tarikul standing on a rooftop in a red t-shirt." loading="lazy" />
+              </div>
+              <figcaption>Tarikul, Bangladesh</figcaption>
+            </figure>
+          </div>
         </div>
         <div>
           <h2 className="title" id="about-title" ref={titleRef}>

@@ -4,6 +4,7 @@ import { SplitText } from './SplitText';
 import { MagneticLink } from './MagneticLink';
 import { RotatingText } from './RotatingText';
 import { SocialIcons } from './SocialIcons';
+import { ShardPortrait } from './ShardPortrait';
 import { usePointerFollow } from '../hooks/usePointerFollow';
 import { roles } from '../data';
 
@@ -81,7 +82,7 @@ export function Hero({ ready, motion }: HeroProps) {
             <div className="chip chip-sm" style={chip(80)}><span><ReactAtom /></span></div>
             <div className="chip chip-sm" style={chip(260)}><span>JS</span></div>
           </div>
-          <img className="pic" src="/images/tarikul-cutout.png" width={834} height={785} alt="" />
+          <ShardPortrait />
           <a className="float-card fc-a" href="#work" tabIndex={-1}>
             <img src="/images/bloodconnect-logo.svg" width={36} height={36} alt="" />
             <span>
