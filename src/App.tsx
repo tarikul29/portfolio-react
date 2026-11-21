@@ -6,6 +6,7 @@ import { Work } from './components/Work';
 import { Skills } from './components/Skills';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
+import { Testimonials } from './components/Testimonials';
 import { Rail } from './components/Rail';
 import { Preloader } from './components/Preloader';
 import { Embers } from './components/Embers';
@@ -16,6 +17,7 @@ import { useActiveSection } from './hooks/useActiveSection';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useScrollVars } from './hooks/useScrollVars';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { useParallax } from './hooks/useParallax';
 
 const ids = sections.map((s) => s.id);
 
@@ -26,6 +28,7 @@ export default function App() {
   const active = useActiveSection(ids);
   useScrollVars();
   useSmoothScroll(motion);
+  useParallax(motion, '.title, .stage-wrap, .hang, .stats, .cform');
 
   const onIntroDone = useCallback(() => setReady(true), []);
 
@@ -47,6 +50,7 @@ export default function App() {
         <Work motion={motion} />
         <Skills motion={motion} />
         <About motion={motion} />
+        <Testimonials motion={motion} />
         <Contact motion={motion} />
       </main>
       <footer className="foot wrap">

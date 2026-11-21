@@ -110,3 +110,33 @@ export const ticker = [
 ];
 
 export const roles = ['fast websites', 'smooth animations', 'React apps', 'clean interfaces'];
+
+/**
+ * Testimonials: what people say about working with Tarikul.
+ * Fill `quote` (2-4 sentences) and `role` (for example "Client, BloodConnect BD")
+ * with what the person really told you. The section stays hidden until at least
+ * one quote is filled in, and a card without a quote is skipped.
+ */
+export const testimonials = [
+  {
+    name: 'Ramim',
+    role: 'Teammate',
+    photo: '/images/friend-ramim.webp',
+    quote:
+      'Working with Tarikul is easy and productive. He takes the work seriously, listens to ideas, and delivers clean, good-looking pages on time. I would happily work with him again.',
+  },
+  {
+    name: 'Rokon',
+    role: 'Teammate',
+    photo: '/images/friend-rokon.webp',
+    quote:
+      'Tarikul is dependable and always ready to help when something gets stuck. He cares about small details, and the interfaces he builds feel smooth and polished.',
+  },
+  {
+    name: 'Sayem',
+    role: 'Teammate',
+    photo: '/images/friend-sayem.webp',
+    quote:
+      'I have worked with Tarikul on projects and he is calm, creative and hard-working. He explains things clearly and keeps improving the work until it looks right.',
+  },
+];

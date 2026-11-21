@@ -798,3 +798,300 @@ body.is-locked {
 .shard::after {
   display: none;
 }
+
+/* ---------- Friends ---------- */
+.friends {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.friend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(1.4rem, 3vw, 2rem) 1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.2rem;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(0, 5, 27, 0.5));
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(60px) scale(0.94);
+  transition: opacity 0.9s ease, transform 1.1s var(--ease), border-color 0.4s ease, box-shadow 0.4s ease;
+  transition-delay: calc(var(--i) * 140ms), calc(var(--i) * 140ms), 0s, 0s;
+}
+
+.friends.is-in .friend {
+  opacity: 1;
+  transform: none;
+}
+
+.friends.is-in .friend:hover {
+  transform: translateY(-8px);
+  border-color: rgba(244, 114, 182, 0.55);
+  box-shadow: 0 24px 50px rgba(0, 5, 27, 0.5), 0 0 40px rgba(139, 124, 246, 0.25);
+  transition-delay: 0s;
+}
+
+.friend-ring {
+  display: block;
+  width: min(11rem, 50vw);
+  aspect-ratio: 1;
+  padding: 5px;
+  border-radius: 50%;
+  background: var(--g-warm);
+}
+
+.friend:nth-child(2) .friend-ring {
+  background: var(--g-cool);
+}
+
+.friend-ring img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--navy-deep);
+}
+
+.friend-name {
+  margin: 1rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.friend-role {
+  margin: 0.1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.friend-quote {
+  margin: 0.9rem 0 0;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 48rem) {
+  .friends {
+    grid-template-columns: 1fr;
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .friend {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Testimonials (longer quotes) ---------- */
+.testi .friend {
+  align-items: stretch;
+  text-align: left;
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+
+.testi-mark {
+  font-family: var(--serif);
+  font-size: 4.5rem;
+  line-height: 0.6;
+  height: 1.6rem;
+  background: var(--g-warm);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.testi .friend-quote {
+  flex: 1;
+  margin: 0.8rem 0 1.4rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.testi-who {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.testi-who .friend-ring {
+  width: 3.6rem;
+  flex: none;
+  padding: 3px;
+}
+
+.testi-who .friend-ring img {
+  border-width: 2px;
+}
+
+.testi-who .friend-name {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+/* =====================================================================
+   Scroll drift, card shine, contact form
+   ===================================================================== */
+
+/* Elements drift slowly as they cross the screen (set by useParallax) */
+.title { translate: 0 calc((var(--p, 0.5) - 0.5) * -46px); }
+.stage-wrap { translate: 0 calc((var(--p, 0.5) - 0.5) * -90px); }
+.hang { translate: 0 calc((var(--p, 0.5) - 0.5) * 60px); }
+.stats { translate: 0 calc((var(--p, 0.5) - 0.5) * -30px); }
+.cform { translate: 0 calc((var(--p, 0.5) - 0.5) * -24px); }
+
+.blob {
+  translate: 0 calc(var(--progress, 0) * -26vh);
+}
+
+/* A band of light sweeps across a card on hover */
+.card,
+.ccard,
+.friend,
+.cform,
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before,
+.ccard::before,
+.friend::before,
+.btn::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -60%;
+  width: 40%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-18deg) translateX(0);
+  opacity: 0;
+}
+
+.card:hover::before,
+.ccard:hover::before,
+.friend:hover::before,
+.btn:hover::after {
+  opacity: 1;
+  animation: shine 0.9s var(--ease) both;
+}
+
+@keyframes shine {
+  from { transform: skewX(-18deg) translateX(0); }
+  to { transform: skewX(-18deg) translateX(480%); }
+}
+
+/* ---------- Contact form ---------- */
+.cform {
+  display: grid;
+  gap: 1rem;
+  max-width: 44rem;
+  margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.2rem;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(0, 5, 27, 0.55));
+  backdrop-filter: blur(8px);
+}
+
+.cform-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+}
+
+.cform-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.cform-field {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.cform-field input,
+.cform-field textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.6rem;
+  background: rgba(0, 5, 27, 0.55);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cform-field textarea {
+  resize: vertical;
+}
+
+.cform-field input:focus,
+.cform-field textarea:focus {
+  outline: none;
+  border-color: #f472b6;
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.25);
+}
+
+.cform-honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.cform-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cform-foot .btn {
+  padding: 0.7rem 1.5rem;
+  border: 0;
+  cursor: pointer;
+}
+
+.cform-foot .btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.cform-note {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.cform-sent { color: var(--mint); }
+.cform-error { color: #fda4af; }
+
+@media (max-width: 40rem) {
+  .cform-row { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title, .stage-wrap, .hang, .stats, .cform, .blob { translate: none; }
+  .card::before, .ccard::before, .friend::before, .btn::after { display: none; }
+}

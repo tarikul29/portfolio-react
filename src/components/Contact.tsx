@@ -6,6 +6,7 @@ import { SocialIcons } from './SocialIcons';
 import { Reveal } from './Reveal';
 import { useInView } from '../hooks/useInView';
 import { useTilt } from '../hooks/useTilt';
+import { ContactForm } from './ContactForm';
 
 interface ContactCardProps {
   label: string;
@@ -112,6 +113,10 @@ export function Contact({ motion }: { motion: boolean }) {
             motion={motion}
           />
         </div>
+      </Reveal>
+
+      <Reveal delay={300}>
+        <ContactForm />
       </Reveal>
 
       <Reveal delay={350}>
